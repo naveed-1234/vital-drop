@@ -349,7 +349,7 @@ async function loadDonationHistory() {
 }
 
 function downloadCertificate(requestId) {
-    window.open(`/certificate/download/${requestId}`, "_blank");
+    window.open(`https://vitaldrop-backend.onrender.com/certificate/download/${requestId}`, "_blank");
 }
 
 function showSection(sectionId, menu){
