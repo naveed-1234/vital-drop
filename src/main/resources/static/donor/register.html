@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Donor Registration</title>
+    <link rel="stylesheet" href="../css/donor.css">
+</head>
+<body class="auth-page">
+
+<div class="form-container">
+
+    <h2>Donor Registration</h2>
+
+    <form id="registerForm">
+
+
+    <input type="text" id="fullName" placeholder="Full Name">
+
+    <input type="email" id="email" placeholder="Email">
+
+    <button type="button" class="secondary-btn" onclick="sendOtp()">
+        Send OTP
+    </button>
+
+    <input type="text" id="otp" placeholder="Enter OTP">
+
+    <button id="verifyBtn" type="button" class="success-btn" onclick="verifyOtp()">
+        Verify OTP
+    </button>
+
+    <p id="verificationStatus"></p>
+
+    <input type="password" id="password" placeholder="Password">
+
+    <input type="text" id="phone" placeholder="Phone Number">
+
+    <input type="text" id="bloodGroup" placeholder="Blood Group">
+
+    <input type="text" id="city" placeholder="City">
+
+    <button
+            type="button"
+            id="registerBtn"
+            class="primary-btn"
+            onclick="registerDonor()"
+            disabled>
+        Register
+    </button>
+        <p>Already registered? <a href="login.html">login here</a></p>
+    </form>
+
+</div>
+
+<script src="../js/donor.js"></script>
+
+</body>
+<footer class="landing-footer">
+    <p>&copy; 2026 Vital Drop Organization. Secure Industry Node. All Rights Reserved.</p>
+</footer>
+</html>

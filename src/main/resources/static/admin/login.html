@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Gateway Portal — Vital Drop</title>
+    <link rel="stylesheet" href="admin.css">
+    <script src="../js/admin.js" defer></script>
+</head>
+<body class="auth-page">
+
+<div class="form-container">
+    <h2>Admin Console</h2>
+    <form onsubmit="event.preventDefault(); loginAdmin();">
+        <input type="text" id="username" placeholder="Username" required autocomplete="username">
+        <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
+        <button type="submit" class="primary-btn">Login to Console</button>
+    </form>
+    <p id="loginStatus"></p>
+</div>
+
+<footer class="landing-footer">
+    <p>&copy; 2026 Vital Drop Organization. Secure Industry Node. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

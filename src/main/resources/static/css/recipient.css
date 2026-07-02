@@ -1,0 +1,386 @@
+/* ==========================================================================
+   1. GLOBAL ARCHITECTURE & SYSTEM DESIGN VARIABLE TOKENS
+   ========================================================================== */
+:root {
+    --bg-app: #090d16;             /* Deep tech midnight slate foundation */
+    --bg-surface: #0f172a;         /* High-contrast solid dark panel background */
+    --bg-surface-glass: rgba(30, 41, 59, 0.85); /* Premium bright frosted glass */
+
+    /* Premium Identity Brand Matrix */
+    --color-burgundy: #801921;     /* Primary brand color tone */
+    --color-burgundy-hover: #99222b;
+    --color-indigo: #6366f1;       /* UI analytical highlights */
+    --color-gold: #fbbf24;         /* Action requirements / Warnings */
+    --color-emerald: #10b981;      /* Verification completion / Access status */
+
+    --text-primary: #f8fafc;       /* High contrast white text font */
+    --text-muted: #64748b;         /* Low-impact secondary slate gray */
+    --border-glass: rgba(255, 255, 255, 0.06);
+    --border-glow: rgba(128, 25, 33, 0.3);
+
+    --radius-lg: 18px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+
+    --shadow-main: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* --- Smooth Spatial Rendering Animation Cascade --- */
+@keyframes platformEntrance {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   2. SHARED LAYOUT RESET ENGINE & BASE CONTEXT RULES
+   ========================================================================== */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-app);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* Base Hyperlink Configurations */
+a {
+    color: var(--color-indigo);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition-smooth);
+}
+a:hover {
+    color: #818cf8;
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   3. SECURE AUTHENTICATION FLOW SYSTEM (Login, Register, Forgot Password)
+   ========================================================================== */
+.auth-page {
+    background: radial-gradient(circle at 50% 30%, #131a30 0%, #090d16 75%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding-top: 40px;
+}
+
+/* Center Form Canvas Layout */
+.form-container {
+    background: var(--bg-surface-glass);
+    box-shadow: var(--shadow-main), inset 0 0 20px rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 420px;
+    margin: auto 0;
+    padding: 40px;
+    box-sizing: border-box;
+    animation: platformEntrance 0.5s ease-out;
+}
+
+.form-container h2 {
+    margin: 0 0 25px 0;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-align: center;
+    background: linear-gradient(90deg, #818cf8 0%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.form-container p {
+    font-size: 14px;
+    color: var(--text-muted);
+    text-align: center;
+    margin: 16px 0 0 0;
+}
+
+/* High-Density Input Architecture */
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"],
+.form-container select {
+    width: 100%;
+    background: #0b1329;
+    color: var(--text-primary);
+    border: 1px solid var(--border-glass);
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
+    transition: var(--transition-smooth);
+}
+
+.form-container input:focus,
+.form-container select:focus {
+    border-color: rgba(99, 102, 241, 0.5);
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.15);
+}
+
+/* Form Action Buttons Configuration Matrix */
+.form-container button {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.form-container form br,
+.form-container > br {
+    display: none; /* Removes unnecessary line breaks */
+}
+
+/* ==========================================================================
+   4. APPSHELL MAIN WORKSPACE ARCHITECTURE (Dashboard Platform Core)
+   ========================================================================== */
+.top-header {
+    height: 70px;
+    background: #0b1329;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    box-sizing: border-box;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(90deg, var(--color-burgundy) 0%, rgba(99, 102, 241, 0.4) 50%, var(--color-burgundy) 100%) 1;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+}
+
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand h1 {
+    margin: 0; font-size: 24px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;
+    background: linear-gradient(90deg, #818cf8 0%, #e2e8f0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.brand-badge {
+    font-size: 11px; font-weight: 700; text-transform: uppercase; background: rgba(255, 255, 255, 0.05);
+    padding: 4px 10px; border-radius: 12px; border: 1px solid var(--border-glass); color: #818cf8;
+}
+
+.user-info {
+    font-size: 13px; font-weight: 600; color: #cbd5e1; display: flex; align-items: center; gap: 8px;
+    background: rgba(255, 255, 255, 0.05); padding: 6px 16px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dashboard-container {
+    display: flex;
+    flex: 1;
+    height: calc(100vh - 70px);
+}
+
+/* Left Drawer Menu Platform */
+.sidebar {
+    width: 250px;
+    background: var(--bg-sidebar);
+    padding-top: 24px;
+    border-right: 1px solid var(--border-glass);
+    box-shadow: var(--shadow-main);
+}
+
+.menu { list-style: none; margin: 0; padding: 0 12px; }
+.menu li {
+    padding: 12px 18px; margin-bottom: 6px; cursor: pointer; font-size: 14px; font-weight: 500;
+    color: #94a3b8; border-radius: var(--radius-sm); transition: var(--transition-smooth); display: flex; align-items: center; gap: 10px;
+}
+.menu li:hover { background: rgba(255, 255, 255, 0.03); color: #ffffff; padding-left: 24px; }
+.activeMenu { background: var(--color-burgundy) !important; color: #ffffff !important; font-weight: 600 !important; box-shadow: 0 4px 15px rgba(128, 25, 33, 0.4); }
+.menu-logout:hover { background: rgba(239, 68, 68, 0.1) !important; color: #ef4444 !important; }
+
+/* Dynamic Content Display Workspaces */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+    background: radial-gradient(circle at 50% 0%, #131a30 0%, #090d16 70%);
+    box-sizing: border-box;
+}
+
+.section-header { margin-bottom: 28px; }
+.section h2 { color: #ffffff; font-size: 24px; font-weight: 700; margin: 0; position: relative; display: inline-block; }
+.section h2::after { content: ''; position: absolute; bottom: -6px; left: 0; width: 32px; height: 3px; background: var(--color-burgundy); border-radius: 2px; }
+.section-desc { color: var(--text-muted); font-size: 13px; margin: 10px 0 0 0; }
+
+/* Dashboard Specific Search Box Panel */
+.search-console-box {
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    padding: 20px 24px;
+    margin-bottom: 30px;
+    border: 1px solid var(--border-glass);
+    max-width: 600px;
+    box-shadow: var(--shadow-main);
+}
+.search-row { display: flex; gap: 16px; align-items: center; }
+
+.main-content select {
+    flex: 1; background: #0b1329; color: var(--text-primary); border: 1px solid var(--border-glass);
+    padding: 12px 16px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; outline: none; transition: var(--transition-smooth);
+}
+.main-content select:focus { border-color: rgba(99, 102, 241, 0.6); }
+
+/* Ledger Matrix Data Tables */
+.table-container {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-glass);
+    box-shadow: var(--shadow-main);
+    background: var(--bg-card);
+    animation: platformEntrance 0.5s ease-out;
+    margin-bottom: 40px;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+th {
+    background: rgba(255, 255, 255, 0.02);
+    color: #94a3b8;
+    padding: 16px 24px;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: left;
+    border-bottom: 2px solid var(--border-glass);
+}
+
+td {
+    padding: 16px 24px;
+    text-align: left;
+    color: #cbd5e1;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    transition: var(--transition-smooth);
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.02); color: #ffffff; }
+
+/* ==========================================================================
+   5. COMPONENT SYSTEM ELEMENTS (Buttons & Interactive Notification Nodes)
+   ========================================================================== */
+button, .primary-btn, .secondary-btn, .success-btn {
+    font-family: inherit;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: var(--transition-smooth);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Master Button Color Variant Hierarchies */
+button, .primary-btn {
+    background: var(--color-burgundy);
+    box-shadow: 0 4px 12px rgba(128, 25, 33, 0.25);
+}
+button:hover, .primary-btn:hover {
+    background: var(--color-burgundy-hover);
+    box-shadow: 0 6px 18px rgba(128, 25, 33, 0.4);
+    transform: translateY(-1px);
+}
+
+.secondary-btn {
+    background: var(--color-indigo);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.25);
+}
+.secondary-btn:hover {
+    background: #4f46e5;
+    box-shadow: 0 6px 18px rgba(99, 102, 241, 0.4);
+    transform: translateY(-1px);
+}
+
+.success-btn {
+    background: var(--color-emerald);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+}
+.success-btn:hover {
+    background: #059669;
+    box-shadow: 0 6px 18px rgba(16, 185, 129, 0.4);
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    background: #1e293b !important;
+    color: #475569 !important;
+    cursor: not-allowed !important;
+    box-shadow: none !important;
+    transform: none !important;
+}
+
+button:active { transform: translateY(0); }
+
+/* Live Network Validation Notification Channels */
+#verificationStatus, #loginStatus {
+    font-size: 13px !important;
+    font-weight: 600;
+    text-align: center;
+    margin: 14px 0 0 0;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    background: rgba(0, 0, 0, 0.15);
+    display: block;
+    empty-cells: show;
+}
+#verificationStatus:empty, #loginStatus:empty { display: none; }
+
+/* ==========================================================================
+   6. GLOBAL APP ANCHOR FOOTER
+   ========================================================================== */
+.landing-footer {
+    text-align: center;
+    padding: 24px;
+    border-top: 1px solid var(--border-glass);
+    font-size: 13px;
+    color: #475569;
+    background-color: rgba(6, 9, 19, 0.5);
+    backdrop-filter: blur(8px);
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 10;
+}
+.landing-footer p { margin: 0; color: #475569 !important; }
+
+/* --- High-End Inline Button Spinner --- */
+.spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 8px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #ffffff; /* Crisp white line that spins */
+    animation: spinWheel 0.8s linear infinite;
+    vertical-align: middle;
+}
+
+@keyframes spinWheel {
+    to { transform: rotate(360deg); }
+}
+
+/* Optional styling adjustment to keep text alignment perfect during loading */
+button:disabled {
+    opacity: 0.8;
+    cursor: not-allowed;
+}

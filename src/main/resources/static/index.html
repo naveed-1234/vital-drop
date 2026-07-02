@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitalDrop | Life Saving Network Platform</title>
+    <link rel="stylesheet" href="main.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<header class="main-header">
+    <div class="header-content">
+        <a href="index.html" class="brand-link">
+            <img src="images/logo.png" alt="VitalDrop Logo" class="brand-logo">
+            <h1 class="brand-title">VitalDrop</h1>
+            <span class="brand-badge">Network Node</span>
+        </a>
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="stats-grid">
+        <div class="stat-card">
+            <h3>Registered Donors</h3>
+            <p class="number" id="donorCount">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Recipients Connected</h3>
+            <p class="number" id="recipientCount">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>Successful Donations</h3>
+            <p class="number" id="completedCount">0</p>
+        </div>
+    </section>
+
+    <section class="modules-grid">
+        <div class="module-card">
+            <div class="icon">🩸</div>
+            <h2>Donor Portal</h2>
+            <p>Register as a voluntary donor, manage your micro-availability toggles, accept matching blood requests, and claim credentials certificates.</p>
+            <a href="donor/login.html" class="btn">Enter as Donor</a>
+        </div>
+        <div class="module-card">
+            <div class="icon">🏥</div>
+            <h2>Recipient Portal</h2>
+            <p>Search for verified active matches inside your local grid, dispatch real-time emergency requests, and view donation history parameters.</p>
+            <a href="recipient/login.html" class="btn">Enter as Recipient</a>
+        </div>
+    </section>
+
+    <div class="video-container" style="margin-bottom: 4rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+        <h3 style="text-align: center; margin-bottom: 1.5rem; color: #ffffff;">Donor Blood Group Distribution</h3>
+        <canvas id="bloodGroupChart"></canvas>
+    </div>
+
+    <h2 class="section-title">Blood Group Compatibility Reference Matrix</h2>
+    <section class="table-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Blood Type</th>
+                <th>Can Receive From (Compatible Inbound)</th>
+                <th>Can Donate To (Compatible Outbound)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><strong>A+</strong></td>
+                <td><span class="tag">A+</span><span class="tag">A-</span><span class="tag">O+</span><span class="tag">O-</span></td>
+                <td><span class="tag give">A+</span><span class="tag give">AB+</span></td>
+            </tr>
+            <tr>
+                <td><strong>O+</strong></td>
+                <td><span class="tag">O+</span><span class="tag">O-</span></td>
+                <td><span class="tag give">O+</span><span class="tag give">A+</span><span class="tag give">B+</span><span class="tag give">AB+</span></td>
+            </tr>
+            <tr>
+                <td><strong>B+</strong></td>
+                <td><span class="tag">B+</span><span class="tag">B-</span><span class="tag">O+</span><span class="tag">O-</span></td>
+                <td><span class="tag give">B+</span><span class="tag give">AB+</span></td>
+            </tr>
+            <tr>
+                <td><strong>AB+</strong></td>
+                <td><span class="tag">Everyone (Universal Recipient)</span></td>
+                <td><span class="tag give">AB+</span></td>
+            </tr>
+            <tr>
+                <td><strong>A-</strong></td>
+                <td><span class="tag">A-</span><span class="tag">O-</span></td>
+                <td><span class="tag give">A+</span><span class="tag give">A-</span><span class="tag give">AB+</span><span class="tag give">AB-</span></td>
+            </tr>
+            <tr>
+                <td><strong>O-</strong></td>
+                <td><span class="tag">O-</span></td>
+                <td><span class="tag give">Everyone (Universal Donor)</span></td>
+            </tr>
+            <tr>
+                <td><strong>B-</strong></td>
+                <td><span class="tag">B-</span><span class="tag">O-</span></td>
+                <td><span class="tag give">B+</span><span class="tag give">B-</span><span class="tag give">AB+</span><span class="tag give">AB-</span></td>
+            </tr>
+            <tr>
+                <td><strong>AB-</strong></td>
+                <td><span class="tag">AB-</span><span class="tag">A-</span><span class="tag">B-</span><span class="tag">O-</span></td>
+                <td><span class="tag give">AB+</span><span class="tag give">AB-</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <h2 class="section-title">Understanding the Impact of Blood Donation</h2>
+    <section class="video-container">
+        <div class="video-wrapper">
+            <iframe src="https://www.youtube.com/embed/eUenI0Zp0ic" title="The scientific reasons to donate blood" allowfullscreen></iframe>
+        </div>
+    </section>
+
+</main>
+
+<footer class="landing-footer">
+    <p>&copy; 2026 VitalDrop Organization Node. Secure Industry Core. All Rights Reserved.</p>
+</footer>
+
+<script>
+    window.onload = async function() {
+     try {
+         const response = await fetch('/requests/public/stats');
+         if (response.ok) {
+             const stats = await response.json();
+
+             document.getElementById('donorCount').innerText = stats.totalDonors || 0;
+             document.getElementById('recipientCount').innerText = stats.totalRecipients || 0;
+             document.getElementById('completedCount').innerText = stats.completedRequests || 0;
+
+             // Render Chart.js Distribution Data dynamically
+             const ctx = document.getElementById('bloodGroupChart').getContext('2d');
+             const bgData = stats.bloodGroups || {};
+
+             new Chart(ctx, {
+                 type: 'doughnut',
+                 data: {
+                     labels: Object.keys(bgData),
+                     datasets: [{
+                         data: Object.values(bgData),
+                         backgroundColor: ['#ef4444', '#f87171', '#3b82f6', '#60a5fa', '#10b981', '#34d399', '#f59e0b', '#fbbf24'],
+                         borderWidth: 1,
+                         borderColor: '#0f172a'
+                     }]
+                 },
+                 options: {
+                     responsive: true,
+                     plugins: {
+                         legend: { position: 'bottom', labels: { color: '#94a3b8' } }
+                     }
+                 }
+             });
+         }
+     } catch (error) {
+         console.error("Error loading stats chart visualization:", error);
+     }
+ };
+</script>
+</body>
+</html>

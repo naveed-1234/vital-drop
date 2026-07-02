@@ -1,0 +1,296 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body{
+    background-color: #f8fafc; /* Crisp, clean off-white canvas */
+    min-height: 100vh;
+    color: #0f172a; /* Deep slate instead of harsh black */
+    -webkit-font-smoothing: antialiased;
+}
+
+.auth-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f1f5f9;
+    /* Subtle geometric grid background pattern for professional tech aesthetic */
+    background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+.form-container{
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05),
+                0 10px 15px -3px rgba(0, 0, 0, 0.05),
+                0 4px 6px -4px rgba(0, 0, 0, 0.05);
+    width: 420px;
+}
+
+.form-container h2{
+    text-align: center;
+    margin-bottom: 24px;
+    color: #0f172a;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+}
+
+.form-container input{
+    width: 100%;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #0f172a;
+    background-color: #ffffff;
+    transition: all 0.15s ease-in-out;
+}
+
+/* Focused inputs mimicking premium enterprise systems */
+.form-container input:focus{
+    outline: none;
+    border-color: #6366f1; /* Premium Indigo focus */
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.form-container button{
+    width: 100%;
+    padding: 10px 16px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 12px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.15s ease-in-out;
+}
+
+/* Professional Slate/Indigo Primary (Replaces Red) */
+.primary-btn{
+    background-color: #0f172a;
+    color: #ffffff;
+}
+
+.primary-btn:hover{
+    background-color: #1e293b;
+}
+
+/* Corporate Secondary Blue */
+.secondary-btn{
+    background-color: #4f46e5;
+    color: #ffffff;
+}
+
+.secondary-btn:hover{
+    background-color: #4338ca;
+}
+
+/* Executive Mint/Success Green */
+.success-btn{
+    background-color: #16a34a;
+    color: #ffffff;
+}
+
+.success-btn:hover{
+    background-color: #15803d;
+}
+
+button:disabled{
+    background-color: #f1f5f9 !important;
+    border-color: #e2e8f0 !important;
+    color: #94a3b8 !important;
+    cursor: not-allowed;
+}
+
+.dashboard-container{
+    width: 100%;
+}
+
+/* Modern, Clean Enterprise Dashboard Header */
+.dashboard-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 32px;
+    background: #ffffff;
+    color: #0f172a;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.welcome-section{
+    padding: 32px 32px 8px 32px;
+}
+
+.welcome-section h1 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #0f172a;
+    letter-spacing: -0.025em;
+}
+
+.action-buttons{
+    padding: 8px 32px 24px 32px;
+}
+
+.action-buttons button{
+    margin-right: 8px;
+    padding: 8px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #334155;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: all 0.15s ease-in-out;
+}
+
+.action-buttons button:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+    color: #0f172a;
+}
+
+#requestContainer{
+    padding: 0 32px 32px 32px;
+}
+
+.profile-section{
+    position: relative;
+    display: inline-block;
+}
+
+/* Minimalist Profile Trigger */
+#profileBtn{
+    padding: 8px 14px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: #334155;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+}
+
+#profileBtn:hover {
+    background: #f8fafc;
+    border-color: #94a3b8;
+}
+
+.dropdown-content{
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: #ffffff;
+    color: #0f172a;
+    min-width: 240px;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+/* High-End Clean UI Tables */
+#requestTable,#historyTable, table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+}
+
+#requestTable th, table th,
+#requestTable td, table td {
+    padding: 14px 20px;
+    text-align: left; /* Shifted to left-aligned for a vastly cleaner corporate format */
+    font-size: 14px;
+}
+
+#requestTable th, table th {
+    background: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+#requestTable td, table td {
+    border-bottom: 1px solid #f1f5f9;
+    color: #334155;
+}
+
+#requestTable tr:last-child td, table tr:last-child td {
+    border-bottom: none;
+}
+
+#requestTable tr:nth-child(even), table tr:nth-child(even){
+    background: #ffffff; /* Removed harsh stripe colors to keep it pristine */
+}
+
+/* Subtle, sharp row highlight on mouseover */
+#requestTable tr:hover, table tr:hover {
+    background: #f8fafc;
+}
+
+#historyTable th, table th,
+#historyTable td, table td {
+    padding: 14px 20px;
+    text-align: left; /* Shifted to left-aligned for a vastly cleaner corporate format */
+    font-size: 14px;
+}
+
+#historyTable th, table th {
+    background: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+#historyTable td, table td {
+    border-bottom: 1px solid #f1f5f9;
+    color: #334155;
+}
+
+#historyTable tr:last-child td, table tr:last-child td {
+    border-bottom: none;
+}
+
+#historyTable tr:nth-child(even), table tr:nth-child(even){
+    background: #ffffff; /* Removed harsh stripe colors to keep it pristine */
+}
+
+/* Subtle, sharp row highlight on mouseover */
+#historyTable tr:hover, table tr:hover {
+    background: #f8fafc;
+}
+
+.landing-footer {
+    text-align: center;
+    padding: 30px;
+    border-top: 1px solid var(--border-glass);
+    z-index: 10;
+    font-size: 13px;
+    color: #475569;
+}
+

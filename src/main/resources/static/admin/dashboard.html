@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Administration Console — Vital Drop</title>
+    <link rel="stylesheet" href="admin.css">
+    <script src="../js/admin.js" defer></script>
+</head>
+<body>
+
+<header class="top-header">
+    <div class="brand">
+        <h1>Vital Drop</h1>
+        <div class="brand-badge">Admin System</div>
+    </div>
+    <div class="user-info">
+        <span class="user-avatar">⚙</span>
+        <span id="welcomeText">Admin Console</span>
+    </div>
+</header>
+
+<div class="dashboard-container">
+
+    <div class="sidebar">
+        <ul class="menu">
+            <li id="dashboardMenu" class="activeMenu" onclick="showSection('dashboardSection', this)">
+                <span class="menu-icon">📊</span> Overview
+            </li>
+            <li onclick="showSection('donorsSection', this)">
+                <span class="menu-icon">🩸</span> Manage Donors
+            </li>
+            <li onclick="showSection('recipientsSection', this)">
+                <span class="menu-icon">👥</span> Manage Recipients
+            </li>
+            <li onclick="showSection('requestsSection', this)">
+                <span class="menu-icon">📥</span> Manage Requests
+            </li>
+            <li onclick="logout()" class="menu-logout">
+                <span class="menu-icon">🚪</span> System Logout
+            </li>
+        </ul>
+    </div>
+
+    <div class="main-content">
+
+        <div id="dashboardSection" class="section">
+            <div class="section-header">
+                <h2>System Overview</h2>
+                <p class="section-desc">Live status metrics across distribution grids and node operational counts.</p>
+            </div>
+
+            <div class="cards">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Total Donors</h3>
+                        <span class="card-badge-icon">👥</span>
+                    </div>
+                    <p id="totalDonors">0</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Total Recipients</h3>
+                        <span class="card-badge-icon">⚲</span>
+                    </div>
+                    <p id="totalRecipients">0</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Available Donors</h3>
+                        <span class="card-badge-icon">✓</span>
+                    </div>
+                    <p id="availableDonors">0</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Pending Requests</h3>
+                        <span class="card-badge-icon">⚠️</span>
+                    </div>
+                    <p id="pendingRequests">0</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Accepted Requests</h3>
+                        <span class="card-badge-icon">🤝</span>
+                    </div>
+                    <p id="acceptedRequests">0</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="donorsSection" class="section" style="display:none;">
+            <div class="section-header">
+                <h2>Manage Donors</h2>
+                <p class="section-desc">Administrative actions and status overrides for global voluntary blood donors.</p>
+            </div>
+
+            <div class="table-container">
+
+                <div class="admin-search-box" style="margin-bottom: 1.5rem; display: flex; gap: 10px; max-width: 400px;">
+                    <input
+                            type="text"
+                            id="adminDonorSearchInput"
+                            placeholder="Search donors by name..."
+                            style="width: 100%; padding: 0.6rem 1rem; border: 1px solid var(--border-glass); border-radius: 6px; background: var(--bg-surface); color: white;"
+                            oninput="searchDonorsAdmin(this.value)"
+                    >
+                    <button
+                            type="button"
+                            onclick="executeAdminDonorSearch()"
+                            style="padding: 0.6rem 1.2rem; background-color: var(--color-burgundy, #801921); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;"
+                    >
+                        Search
+                    </button>
+                </div>
+                <table id="donorTable">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Blood Group</th>
+                        <th>City</th>
+                        <th>Availability</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody id="donorList"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="recipientsSection" class="section" style="display:none;">
+            <div class="section-header">
+                <h2>Manage Recipients</h2>
+                <p class="section-desc">Audit control matrix for consumer institutions and request profiles.</p>
+            </div>
+
+            <div class="table-container">
+
+                <div class="admin-search-box" style="margin-bottom: 1.5rem; display: flex; gap: 10px; max-width: 400px;">
+                    <input
+                            type="text"
+                            id="adminRecipientSearchInput"
+                            placeholder="Search recipients by name..."
+                            style="width: 100%; padding: 0.6rem 1rem; border: 1px solid var(--border-glass); border-radius: 6px; background: var(--bg-surface); color: white;"
+                            oninput="searchRecipientsAdmin(this.value)"
+                    >
+                    <button
+                            type="button"
+                            onclick="executeAdminRecipientSearch()"
+                            style="padding: 0.6rem 1.2rem; background-color: var(--color-burgundy, #801921); color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer;"
+                    >
+                        Search
+                    </button>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Blood Group</th>
+                        <th>City</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody id="recipientList"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="requestsSection" class="section" style="display:none;">
+            <div class="section-header">
+                <h2>Manage Requests</h2>
+                <p class="section-desc">Real-time system allocation audit tracking across active transport nodes.</p>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Donor Name</th>
+                        <th>Blood Group</th>
+                        <th>City</th>
+                        <th>Recipient Name</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                    </thead>
+                    <tbody id="requestList"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function showSection(sectionId, element) {
+        document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+        document.querySelectorAll('.menu li').forEach(li => li.classList.remove('activeMenu'));
+
+        document.getElementById(sectionId).style.display = 'block';
+        if(element) element.classList.add('activeMenu');
+    }
+</script>
+
+</body>
+</html>

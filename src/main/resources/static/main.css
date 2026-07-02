@@ -1,0 +1,391 @@
+/* ==========================================================================
+   THEME STYLE PROPERTIES RESTORATION
+   ========================================================================== */
+:root {
+    --bg-app: #090d16;             /* Deep tech midnight slate foundation */
+    --bg-surface: #0f172a;         /* High-contrast dark panel backdrop */
+    --bg-surface-glass: rgba(15, 23, 42, 0.65);
+
+    --color-burgundy: #801921;     /* Corporate Brand Burgundy Red */
+    --color-burgundy-hover: #99222b;
+    --color-indigo: #6366f1;
+    --color-emerald: #10b981;
+
+    --text-primary: #f8fafc;       /* Clean high-contrast typography font */
+    --text-muted: #64748b;         /* Low-impact gray description text */
+    --border-glass: rgba(255, 255, 255, 0.06);
+    --border-glow: rgba(128, 25, 33, 0.3);
+
+    --radius-lg: 18px;
+    --radius-md: 12px;
+    --radius-sm: 8px;
+
+    --shadow-main: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* ==========================================================================
+   GLOBAL STRUCTURE SETUP
+   ========================================================================== */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-app);
+    background: radial-gradient(circle at 50% 0%, #131a30 0%, #090d16 70%);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    box-sizing: border-box;
+}
+
+.section-title {
+    font-size: 1.85rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 4rem 0 2rem 0;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+    position: relative;
+}
+
+/* ==========================================================================
+   BRAND HEADER & LOGO CONFIGURATIONS
+   ========================================================================== */
+
+/* ==========================================================================
+   BRAND HEADER & LOGO CONFIGURATIONS (Left-Aligned Amazon Layout Style)
+   ========================================================================== */
+.main-header {
+    height: 75px;
+    background: #0b1329;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(90deg, var(--color-burgundy) 0%, rgba(148, 163, 184, 0.3) 50%, var(--color-burgundy) 100%) 1;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.header-content {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Forces content to stay left-aligned */
+    box-sizing: border-box;
+}
+
+.brand-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none; /* Removes outline lines from text links */
+    transition: var(--transition-smooth);
+}
+
+.brand-link:hover {
+    opacity: 0.95;
+}
+
+.brand-logo {
+    height: 44px; /* Scaled to look high-end and proportional inside a 75px header bar */
+    width: auto;  /* Maintains clean aspect ratios automatically */
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(128, 25, 33, 0.4));
+}
+
+.brand-title {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #e2e8f0 0%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.brand-badge {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 10px;
+    border-radius: 12px;
+    border: 1px solid var(--border-glass);
+    color: #94a3b8;
+}
+
+
+/* ==========================================================================
+   REAL-TIME STATISTICS DISPLAY NODES
+   ========================================================================== */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.stat-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    text-align: center;
+    box-shadow: var(--shadow-main);
+    transition: var(--transition-smooth);
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-glow);
+}
+
+.stat-card h3 {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
+}
+
+.stat-card .number {
+    font-size: 38px;
+    font-weight: 700;
+    margin: 12px 0 0 0;
+    letter-spacing: -1px;
+}
+
+/* Color codes the numeric strings identically to the inside modules counts */
+.stat-card:nth-child(1) .number { color: var(--color-indigo); }
+.stat-card:nth-child(2) .number { color: #fbbf24; }
+.stat-card:nth-child(3) .number { color: var(--color-emerald); }
+
+/* ==========================================================================
+   ROLE PORTALS GATEWAYS ADJACENT DESIGN LAYOUT
+   ========================================================================== */
+.modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+@media (max-width: 768px) {
+    .modules-grid { grid-template-columns: 1fr; }
+}
+
+.module-card {
+    background: var(--bg-surface-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    padding: 3.5rem 2.5rem;
+    text-align: center;
+    box-shadow: var(--shadow-main);
+    transition: var(--transition-smooth);
+    box-sizing: border-box;
+}
+
+.module-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.module-card .icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.module-card h2 {
+    margin: 0 0 10px 0;
+    font-size: 26px;
+    color: #ffffff;
+}
+
+.module-card p {
+    color: var(--text-muted);
+    margin: 0 0 2.5rem 0;
+    font-size: 14px;
+    height: 66px;
+    overflow: hidden;
+}
+
+@media (max-width: 900px) {
+    .module-card p { height: auto; }
+}
+
+.btn {
+    display: inline-flex;
+    background-color: var(--color-burgundy);
+    color: white;
+    padding: 12px 36px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 12px rgba(128, 25, 33, 0.3);
+}
+
+.btn:hover {
+    background-color: var(--color-burgundy-hover);
+    box-shadow: 0 6px 20px rgba(128, 25, 33, 0.5);
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   STATIC GROUP COMPATIBILITY REFERENCE MATRIX TABLE
+   ========================================================================== */
+.table-container {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1px solid var(--border-glass);
+    box-shadow: var(--shadow-main);
+    background: var(--bg-surface);
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+th {
+    background: rgba(255, 255, 255, 0.02);
+    color: #94a3b8;
+    padding: 16px 24px;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--border-glass);
+}
+
+td {
+    padding: 16px 24px;
+    color: #cbd5e1;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    transition: var(--transition-smooth);
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255, 255, 255, 0.02); color: #ffffff; }
+
+.tag {
+    display: inline-block;
+    background: rgba(239, 68, 68, 0.15);
+    color: #f87171;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 4px;
+    margin-bottom: 4px;
+}
+
+.tag.give {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+}
+
+/* ==========================================================================
+   HEALTHCARE VIDEO EMBED EMBED
+   ========================================================================== */
+.video-container {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    box-shadow: var(--shadow-main);
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* ==========================================================================
+   FOOTER SECTION BOUNDARIES
+   ========================================================================== */
+.landing-footer {
+    text-align: center;
+    padding: 30px 24px;
+    border-top: 1px solid var(--border-glass);
+    background-color: rgba(6, 9, 19, 0.5);
+    margin-top: 6rem;
+}
+
+.landing-footer p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+/* ==========================================================================
+   DYNAMIC PROGRESS STEPPER (COMPACT TEXT-BASED BACKUP DESIGN)
+   ========================================================================== */
+.progress-stepper {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.step-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #475569; /* Slate default (inactive gray) */
+    display: inline-block;
+}
+
+.step-line {
+    width: 15px;
+    height: 2px;
+    background: #475569;
+    display: inline-block;
+}
+
+/* Status Specific Colors */
+.step-active {
+    background: #fbbf24 !important;
+    box-shadow: 0 0 6px #fbbf24;
+} /* Pending Alert Glow (Yellow) */
+
+.step-accepted {
+    background: #10b981 !important;
+    box-shadow: 0 0 6px #10b981;
+} /* Approved/In-Transit State (Emerald Green) */
+
+.step-completed {
+    background: #6366f1 !important;
+    box-shadow: 0 0 6px #6366f1;
+} /* Finalized Transaction Success (Indigo Blue) */

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipient Terminal — Vital Drop</title>
+    <link rel="stylesheet" href="../css/recipient.css">
+    <script src="../js/recipient.js" defer></script>
+</head>
+<body>
+
+<header class="top-header">
+    <div class="brand">
+        <h1>Vital Drop</h1>
+        <div class="brand-badge">Recipient Terminal</div>
+    </div>
+    <div class="user-info">
+        <span class="user-avatar">⚲</span>
+        <span id="welcomeText">Welcome Recipient</span>
+    </div>
+</header>
+
+<div class="dashboard-container">
+
+    <!-- Balanced Left Sidebar System -->
+    <div class="sidebar">
+        <ul class="menu">
+            <li id="searchMenu" class="activeMenu" onclick="showSection('searchSection', this)">
+                <span class="menu-icon">🔍</span> Search Donors
+            </li>
+            <li onclick="showSection('myRequestsSection', this)">
+                <span class="menu-icon">⏳</span> My Requests
+            </li>
+            <li onclick="showSection('historySection', this)">
+                <span class="menu-icon">📜</span> Completed Requests
+            </li>
+            <li onclick="logoutRecipient()" class="menu-logout">
+                <span class="menu-icon">🚪</span> Logout
+            </li>
+        </ul>
+    </div>
+
+    <!-- Workspace Platform Engine -->
+    <div class="main-content">
+
+        <!-- Section 1: Search & Load Live Inventory -->
+        <div id="searchSection" class="section">
+            <div class="section-header">
+                <h2>Find Blood Donors</h2>
+                <p class="section-desc">Query live institutional databases across matched regional profiles.</p>
+            </div>
+
+            <!-- Enhanced Search Control Console Block -->
+            <div id="donorContainer" class="search-console-box">
+                <div class="search-row">
+                    <select id="bloodGroup">
+                        <option value="">Select Blood Group</option>
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+                    </select>
+
+                    <button onclick="loadDonors()">
+                        Search Donors
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table id="requestTable">
+                    <thead>
+                    <tr>
+                        <th><span class="th-content">Name</span></th>
+                        <th><span class="th-content">Blood Group</span></th>
+                        <th><span class="th-content">City</span></th>
+                        <th><span class="th-content">Availability</span></th>
+                        <th><span class="th-content">Action</span></th>
+                    </tr>
+                    </thead>
+                    <tbody id="donorList"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Section 2: Active Dynamic Operations Ledger -->
+        <div id="myRequestsSection" class="section" style="display:none;">
+            <div class="section-header">
+                <h2>My Requests</h2>
+                <p class="section-desc">Track active inbound allocations and emergency request queues.</p>
+            </div>
+
+            <div class="table-container">
+                <table id="myRequestTable">
+                    <thead>
+                    <tr>
+                        <th><span class="th-content">Request ID</span></th>
+                        <th><span class="th-content">Donor Name</span></th>
+                        <th><span class="th-content">Status</span></th>
+                        <th><span class="th-content">Date</span></th>
+                        <th><span class="th-content">Action</span></th>
+                    </tr>
+                    </thead>
+                    <tbody id="myRequestList"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Section 3: Finalized Dispatches Archive -->
+        <div id="historySection" class="section" style="display:none;">
+            <div class="section-header">
+                <h2>Completed Donations</h2>
+                <p class="section-desc">Historical archive logs of successfully localized deliveries.</p>
+            </div>
+
+            <div class="table-container">
+                <table id="recipientHistoryTable">
+                    <thead>
+                    <tr>
+                        <th><span class="th-content">Request ID</span></th>
+                        <th><span class="th-content">Donor Name</span></th>
+                        <th><span class="th-content">Date</span></th>
+                        <th><span class="th-content">Status</span></th>
+                    </tr>
+                    </thead>
+                    <tbody id="recipientHistoryList"></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Helper client tab navigation script injected directly so it functions like the donor page -->
+<script>
+    function showSection(sectionId, element) {
+        document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+        // Clear active menu states
+        document.querySelectorAll('.menu li').forEach(li => li.classList.remove('activeMenu'));
+
+        // Show selected section & trigger class highlights
+        document.getElementById(sectionId).style.display = 'block';
+        element.classList.add('activeMenu');
+    }
+</script>
+
+</body>
+<footer class="landing-footer">
+    <p>&copy; 2026 Vital Drop Organization. Secure Industry Node. All Rights Reserved.</p>
+</footer>
+</html>
