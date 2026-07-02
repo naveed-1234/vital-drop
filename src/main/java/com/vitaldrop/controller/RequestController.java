@@ -12,6 +12,7 @@ import java.util.Map; // Import Map
 
 @RestController
 @RequestMapping("/requests")
+@CrossOrigin(origins = "*")
 public class RequestController {
 
     @Autowired
