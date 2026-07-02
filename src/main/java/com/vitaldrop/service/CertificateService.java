@@ -140,7 +140,7 @@ public class CertificateService {
         body.setSpacingAfter(25);
         document.add(body);
 
-        Paragraph quote = new Paragraph("\"Every Drop Saves a Life.\\", quoteFont);
+        Paragraph quote = new Paragraph("Every Drop Saves a Life.", quoteFont);
                 quote.setAlignment(Element.ALIGN_CENTER);
         quote.setSpacingAfter(30); // Reduced space before the signature block
         document.add(quote);
