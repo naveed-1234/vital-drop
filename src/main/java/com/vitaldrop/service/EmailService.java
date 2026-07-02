@@ -10,7 +10,7 @@ import java.util.*;
 public class EmailService {
 
     // 1. Paste your Brevo API key here
-    private final String BREVO_API_KEY = "xsmtpsib-00d04f059a3eeed2172a64cf5a80759fdb0bd9c29223b50f1fb11e1515cc2a3a-2W6ArJxST4idoBLZ";
+    private final String BREVO_API_KEY = "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";
     private final String BREVO_URL = "https://api.brevo.com/v3/smtp/email";
 
     public void sendEmail(String toEmail, String subject, String body) {
