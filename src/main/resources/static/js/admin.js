@@ -23,7 +23,7 @@ async function loginAdmin() {
 
     try {
         const response = await fetch(
-            `/admin/login?username=${username}&password=${password}`,
+            `https://vitaldrop-backend.onrender.com/admin/login?username=${username}&password=${password}`,
             { method: "POST" }
         );
 
@@ -48,7 +48,7 @@ function logout() {
 }
 
 async function loadDonors() {
-    const response = await fetch("/donors/all");
+    const response = await fetch("https://vitaldrop-backend.onrender.com/donors/all");
     const donors = await response.json();
     const donorList = document.getElementById("donorList");
 
@@ -76,14 +76,14 @@ async function deleteDonor(donorId){
     if(!confirm("Delete this donor?")){
         return;
     }
-    const response = await fetch(`/donors/${donorId}`, { method: "DELETE" });
+    const response = await fetch(`https://vitaldrop-backend.onrender.com/donors/${donorId}`, { method: "DELETE" });
     const message = await response.text();
     alert(message);
     loadDonors();
 }
 
 async function loadRecipients() {
-    const response = await fetch("/recipients/all");
+    const response = await fetch("https://vitaldrop-backend.onrender.com/recipients/all");
     const recipients = await response.json();
     const recipientList = document.getElementById("recipientList");
 
@@ -113,13 +113,13 @@ async function deleteRecipient(recipientId){
     if(!confirm("Delete this recipient?")){
         return;
     }
-    const response = await fetch(`/recipients/${recipientId}`, { method: "DELETE" });
+    const response = await fetch(`https://vitaldrop-backend.onrender.com/recipients/${recipientId}`, { method: "DELETE" });
     alert(await response.text());
     loadRecipients();
 }
 
 async function loadAllRequests() {
-    const response = await fetch("/requests/details");
+    const response = await fetch("https://vitaldrop-backend.onrender.com/requests/details");
     const requests = await response.json();
     const requestList = document.getElementById("requestList");
 
@@ -169,7 +169,7 @@ async function loadAllRequests() {
 
 async function loadDashboardStats() {
     try {
-        const response = await fetch("/admin/stats");
+        const response = await fetch("https://vitaldrop-backend.onrender.com/admin/stats");
         const stats = await response.json();
 
         document.getElementById("totalDonors").innerText = stats.totalDonors;
@@ -216,7 +216,7 @@ function showSection(sectionId, element) {
 
 // Example function to call when typing in the Admin Donor search bar
 async function handleAdminDonorSearch(searchString) {
-    const response = await fetch(`/donors/search/name?name=${encodeURIComponent(searchString)}`);
+    const response = await fetch(`https://vitaldrop-backend.onrender.com/donors/search/name?name=${encodeURIComponent(searchString)}`);
     const donors = await response.json();
 
     // Clear and re-populate your admin management grid rows dynamically here
@@ -228,7 +228,7 @@ async function searchDonorsAdmin(queryName) {
     try {
         // Enforces routing fallback path to fetch all entries if query gets cleared out completely
         const url = queryName.trim() === ""
-            ? "/donors/all"
+            ? "https://vitaldrop-backend.onrender.com/donors/all"
             : `/donors/search/name?name=${encodeURIComponent(queryName)}`;
 
         const response = await fetch(url);
@@ -245,7 +245,7 @@ async function searchDonorsAdmin(queryName) {
 async function searchRecipientsAdmin(queryName) {
     try {
         const url = queryName.trim() === ""
-            ? "/recipients/all"
+            ? "https://vitaldrop-backend.onrender.com/recipients/all"
             : `/recipients/search/name?name=${encodeURIComponent(queryName)}`;
 
         const response = await fetch(url);
@@ -263,7 +263,7 @@ async function executeAdminDonorSearch() {
     const queryName = document.getElementById("adminDonorSearchInput").value.trim();
     try {
         const url = queryName === ""
-            ? "/donors/all"
+            ? "https://vitaldrop-backend.onrender.com/donors/all"
             : `/donors/search/name?name=${encodeURIComponent(queryName)}`;
 
         const response = await fetch(url);
@@ -299,7 +299,7 @@ async function executeAdminRecipientSearch() {
     const queryName = document.getElementById("adminRecipientSearchInput").value.trim();
     try {
         const url = queryName === ""
-            ? "/recipients/all"
+            ? "https://vitaldrop-backend.onrender.com/recipients/all"
             : `/recipients/search/name?name=${encodeURIComponent(queryName)}`;
 
         const response = await fetch(url);

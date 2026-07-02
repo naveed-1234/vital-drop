@@ -41,7 +41,7 @@ window.onload = async function () { // Added async keyword here to handle data f
     // ==========================================================================
     try {
         // Fetch all detailed requests assigned to this donor node
-        const response = await fetch(`/requests/donor/${donor.donorId}`);
+        const response = await fetch(`https://vitaldrop-backend.onrender.com/requests/donor/${donor.donorId}`);
         const requests = await response.json();
 
         // 1. Calculate PENDING requests
@@ -83,7 +83,7 @@ async function sendOtp() {
 
     try {
         const response = await fetch(
-            `/otp/send?email=${email}`,
+            `https://vitaldrop-backend.onrender.com/otp/send?email=${email}`,
             { method: "POST" }
         );
 
@@ -121,7 +121,7 @@ async function verifyOtp() {
 
     try {
         const response = await fetch(
-            `/otp/verify?email=${email}&otp=${otp}`,
+            `https://vitaldrop-backend.onrender.com/otp/verify?email=${email}&otp=${otp}`,
             { method: "POST" }
         );
         const message = await response.text();
@@ -160,7 +160,7 @@ async function loginDonor() {
 
     try {
         const response = await fetch(
-            `/donors/login?email=${email}&password=${password}`,
+            `https://vitaldrop-backend.onrender.com/donors/login?email=${email}&password=${password}`,
             { method: "POST" }
         );
 
@@ -188,7 +188,7 @@ function logout() {
 async function toggleAvailability() {
     const donor = JSON.parse(localStorage.getItem("donor"));
     const response = await fetch(
-        `/donors/availability/${donor.donorId}`,
+        `https://vitaldrop-backend.onrender.com/donors/availability/${donor.donorId}`,
         { method: "PUT" }
     );
 
@@ -202,7 +202,7 @@ async function toggleAvailability() {
 
 async function loadRequests() {
     const donor = JSON.parse(localStorage.getItem("donor"));
-    const response = await fetch(`/requests/donor/${donor.donorId}`);
+    const response = await fetch(`https://vitaldrop-backend.onrender.com/requests/donor/${donor.donorId}`);
     const requests = await response.json();
     const requestList = document.getElementById("requestList");
 
@@ -259,7 +259,7 @@ async function loadRequests() {
 
 async function acceptRequest(requestId) {
     const response = await fetch(
-        `/requests/accept/${requestId}`,
+        `https://vitaldrop-backend.onrender.com/requests/accept/${requestId}`,
         { method: "PUT" }
     );
 
@@ -274,7 +274,7 @@ async function acceptRequest(requestId) {
 
 async function rejectRequest(requestId) {
     const response = await fetch(
-        `/requests/reject/${requestId}`,
+        `https://vitaldrop-backend.onrender.com/requests/reject/${requestId}`,
         { method: "PUT" }
     );
 
@@ -304,7 +304,7 @@ async function resetPassword() {
 
     try {
         const response = await fetch(
-            `/donors/reset-password?email=${email}&password=${password}`,
+            `https://vitaldrop-backend.onrender.com/donors/reset-password?email=${email}&password=${password}`,
             { method: "PUT" }
         );
         const message = await response.text();
@@ -318,7 +318,7 @@ async function resetPassword() {
 
 async function loadDonationHistory() {
     const donor = JSON.parse(localStorage.getItem("donor"));
-    const response = await fetch(`/requests/history/donor/${donor.donorId}`);
+    const response = await fetch(`https://vitaldrop-backend.onrender.com/requests/history/donor/${donor.donorId}`);
     const history = await response.json();
     const historyList = document.getElementById("historyList");
 
@@ -382,7 +382,7 @@ function showSection(sectionId, menu){
 
 async function loadCertificates() {
     const donor = JSON.parse(localStorage.getItem("donor"));
-    const response = await fetch(`/requests/history/donor/${donor.donorId}`);
+    const response = await fetch(`https://vitaldrop-backend.onrender.com/requests/history/donor/${donor.donorId}`);
     const history = await response.json();
     const certificateList = document.getElementById("certificateList");
 

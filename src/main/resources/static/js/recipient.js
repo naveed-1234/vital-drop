@@ -17,7 +17,7 @@ async function sendOtp() {
 
     try {
         const response = await fetch(
-            `/otp/send?email=${email}`,
+            `https://vitaldrop-backend.onrender.com/otp/send?email=${email}`,
             { method: "POST" }
         );
 
@@ -55,7 +55,7 @@ async function verifyOtp() {
 
     try {
         const response = await fetch(
-            `/otp/verify?email=${email}&otp=${otp}`,
+            `https://vitaldrop-backend.onrender.com/otp/verify?email=${email}&otp=${otp}`,
             { method: "POST" }
         );
         const message = await response.text();
@@ -99,7 +99,7 @@ async function registerRecipient() {
 
     try {
         const response = await fetch(
-            "/recipients/register",
+            "https://vitaldrop-backend.onrender.com/recipients/register",
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -127,7 +127,7 @@ async function loginRecipient() {
 
     try {
         const response = await fetch(
-            `/recipients/login?email=${email}&password=${password}`,
+            `https://vitaldrop-backend.onrender.com/recipients/login?email=${email}&password=${password}`,
             { method: "POST" }
         );
 
@@ -182,11 +182,11 @@ async function loadDonors() {
 
     try {
         // Fetch active requests first to track who has already been pinged
-        const requestsResponse = await fetch(`/requests/recipient/${recipient.recipientId}`);
+        const requestsResponse = await fetch(`https://vitaldrop-backend.onrender.com/requests/recipient/${recipient.recipientId}`);
         const existingRequests = await requestsResponse.json();
 
         // Fetch matched available donors
-        const donorsResponse = await fetch(`/donors/search?bloodGroup=${encodeURIComponent(bloodGroup)}`);
+        const donorsResponse = await fetch(`https://vitaldrop-backend.onrender.com/donors/search?bloodGroup=${encodeURIComponent(bloodGroup)}`);
         const donors = await donorsResponse.json();
 
         const donorList = document.getElementById("donorList");
@@ -244,7 +244,7 @@ async function sendRequest(buttonElement, donorId) {
 
     try {
         const response = await fetch(
-            "/requests/send",
+            "https://vitaldrop-backend.onrender.com/requests/send",
             {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -278,7 +278,7 @@ async function sendRequest(buttonElement, donorId) {
 
 async function loadMyRequests() {
     const recipient = JSON.parse(localStorage.getItem("recipient"));
-    const response = await fetch(`/requests/recipient/${recipient.recipientId}`);
+    const response = await fetch(`https://vitaldrop-backend.onrender.com/requests/recipient/${recipient.recipientId}`);
     const requests = await response.json();
     const requestList = document.getElementById("myRequestList");
 
@@ -348,7 +348,7 @@ async function resetPassword() {
 
     try {
         const response = await fetch(
-            `/recipients/reset-password?email=${email}&password=${password}`,
+            `https://vitaldrop-backend.onrender.com/recipients/reset-password?email=${email}&password=${password}`,
             { method: "PUT" }
         );
         const message = await response.text();
@@ -362,7 +362,7 @@ async function resetPassword() {
 
 async function confirmDonation(requestId) {
     const response = await fetch(
-        `/requests/complete/${requestId}`,
+        `https://vitaldrop-backend.onrender.com/requests/complete/${requestId}`,
         { method: "PUT" }
     );
 
@@ -378,7 +378,7 @@ async function confirmDonation(requestId) {
 async function loadRecipientHistory() {
     const recipient = JSON.parse(localStorage.getItem("recipient"));
     const response = await fetch(
-        `/requests/history/recipient/${recipient.recipientId}`
+        `https://vitaldrop-backend.onrender.com/requests/history/recipient/${recipient.recipientId}`
     );
     const history = await response.json();
     const historyList = document.getElementById("recipientHistoryList");
