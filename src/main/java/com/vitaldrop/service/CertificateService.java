@@ -8,6 +8,8 @@ import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.lowagie.text.pdf.draw.LineSeparator;
 import org.springframework.stereotype.Service;
+import org.springframework.core.io.ClassPathResource;
+import java.io.InputStream;
 
 import java.awt.Color;
 import java.io.ByteArrayOutputStream;
@@ -59,11 +61,18 @@ public class CertificateService {
         canvas.fill();
 
 
-        /* --- FONTS CONFIGURATION (Optimized sizes for single-page fit) --- */
-        BaseFont cinzel = BaseFont.createFont("src/main/resources/static/fonts/Cinzel-Bold.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-        BaseFont cinzelSemiBold = BaseFont.createFont("src/main/resources/static/fonts/Cinzel-SemiBold.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-        BaseFont playfair = BaseFont.createFont("src/main/resources/static/fonts/PlayfairDisplay-Bold.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-        BaseFont lora = BaseFont.createFont("src/main/resources/static/fonts/Lora-Regular.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+        /* --- FONTS CONFIGURATION (Stream-loaded from Classpath for Jar execution compatibility) --- */
+        byte[] cinzelBytes = new ClassPathResource("static/fonts/Cinzel-Bold.ttf").getInputStream().readAllBytes();
+        BaseFont cinzel = BaseFont.createFont("Cinzel-Bold.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED, true, cinzelBytes, null);
+
+        byte[] cinzelSemiBoldBytes = new ClassPathResource("static/fonts/Cinzel-SemiBold.ttf").getInputStream().readAllBytes();
+        BaseFont cinzelSemiBold = BaseFont.createFont("Cinzel-SemiBold.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED, true, cinzelSemiBoldBytes, null);
+
+        byte[] playfairBytes = new ClassPathResource("static/fonts/PlayfairDisplay-Bold.ttf").getInputStream().readAllBytes();
+        BaseFont playfair = BaseFont.createFont("PlayfairDisplay-Bold.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED, true, playfairBytes, null);
+
+        byte[] loraBytes = new ClassPathResource("static/fonts/Lora-Regular.ttf").getInputStream().readAllBytes();
+        BaseFont lora = BaseFont.createFont("Lora-Regular.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED, true, loraBytes, null);
 
         Font titleFont = new Font(cinzel, 32, Font.NORMAL, primaryRed);
         Font headingFont = new Font(cinzelSemiBold, 16, Font.NORMAL, Color.BLACK);
@@ -76,9 +85,10 @@ public class CertificateService {
         Font footerFont = new Font(Font.TIMES_ROMAN, 9, Font.ITALIC, Color.GRAY);
 
 
-        /* --- BRANDING LOGO --- */
+        /* --- BRANDING LOGO (Fixed to use Classpath Stream) --- */
         try {
-            Image logo = Image.getInstance("src/main/resources/static/images/logo.png");
+            byte[] logoBytes = new ClassPathResource("static/images/logo.png").getInputStream().readAllBytes();
+            Image logo = Image.getInstance(logoBytes);
             logo.scaleToFit(65, 65); // Slightly smaller logo
             logo.setAlignment(Element.ALIGN_CENTER);
             logo.setSpacingAfter(2);
@@ -98,7 +108,7 @@ public class CertificateService {
 
         LineSeparator line = new LineSeparator(1.5f, 25f, goldAccent, Element.ALIGN_CENTER, -5f);
 
-// Add it sequentially so it flows naturally between the title and heading
+        // Add it sequentially so it flows naturally between the title and heading
         document.add(line);
 
 
@@ -130,8 +140,8 @@ public class CertificateService {
         body.setSpacingAfter(25);
         document.add(body);
 
-        Paragraph quote = new Paragraph("\"Every Drop Saves a Life.\"", quoteFont);
-        quote.setAlignment(Element.ALIGN_CENTER);
+        Paragraph quote = new Paragraph("\"Every Drop Saves a Life.\\", quoteFont);
+                quote.setAlignment(Element.ALIGN_CENTER);
         quote.setSpacingAfter(30); // Reduced space before the signature block
         document.add(quote);
 
@@ -177,8 +187,10 @@ public class CertificateService {
         rightCell.setPaddingRight(20f);
         rightCell.setPaddingTop(20f);
 
+        /* --- SIGNATURE IMAGE (Fixed to use Classpath Stream) --- */
         try {
-            Image signatureImg = Image.getInstance("src/main/resources/static/images/signature.png");
+            byte[] signatureBytes = new ClassPathResource("static/images/signature.png").getInputStream().readAllBytes();
+            Image signatureImg = Image.getInstance(signatureBytes);
 
             // Increased bounds from (100, 35) to (160, 60) for a highly realistic signature scale
             signatureImg.scaleToFit(190, 75);
@@ -198,6 +210,7 @@ public class CertificateService {
         rightCell.addElement(signText);
         bottomTable.addCell(rightCell);
 
+        bottomTable.completeRow();
         document.add(bottomTable);
 
 
